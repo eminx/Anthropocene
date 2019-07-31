@@ -288,7 +288,7 @@ const ContextInfo = () => (
     <h3 style={boldBabe}>{publicSettings.contextName}</h3>
     <p>{publicSettings.contextAddress}</p>
     <p>
-      <a href="mailto:info@radicow.com">info@radicow.com</a>
+      <a href={`mailto:${publicSettings.contextEmail}`}>{publicSettings.contextEmail}</a>
     </p>
     {/* <p>
       <a href='https://www.facebook.com/skogen.pm' target='_blank'>
