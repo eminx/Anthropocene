@@ -143,7 +143,7 @@ class LayoutPage extends React.Component {
               </span>
             </Col>
 
-            <Col xs={8} style={{ display: 'flex', justifyContent: 'center' }}>
+            <Col xs={11} style={{ display: 'flex', justifyContent: 'center' }}>
               <Link to="/">
                 {/* <div className="logo skogen-logo" /> */}
                 <h1>

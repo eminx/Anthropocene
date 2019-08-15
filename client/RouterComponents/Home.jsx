@@ -1,10 +1,8 @@
 import React from 'react';
 import moment from 'moment';
-import { Row, List } from 'antd/lib';
+import { Row, Col } from 'antd/lib';
 import Loader from '../UIComponents/Loader';
 import PublicActivityThumb from '../UIComponents/PublicActivityThumb';
-
-const ListItem = List.Item;
 
 const yesterday = moment(new Date()).add(-1, 'days');
 
@@ -80,34 +78,50 @@ class Home extends React.Component {
     const allSortedActivities = this.getAllSorted();
 
     return (
-      <div style={{ padding: 24 }}>
-        <Row gutter={24}>
-          <div
-            style={{
-              justifyContent: 'center',
-              display: 'flex',
-              marginBottom: 50
-            }}
-          >
-            <div style={{ width: '100%' }}>
-              {isLoading ? (
-                <Loader />
-              ) : (
-                <div
-                  style={{
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    justifyContent: 'center'
-                  }}
-                >
-                  {allSortedActivities.map(activity => (
-                    <PublicActivityThumb key={activity.title} item={activity} />
-                  ))}
-                </div>
-              )}
+      <div style={{ padding: 24, width: '100%' }}>
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <div>
+            <Row>
+              <Col sm={0} md={6} />
+              <Col sm={24} md={12} style={{ paddingBottom: 24 }}>
+                <p>
+                  Club Anthropocene is a meetingplace and testing-ground for
+                  visual ant textual conceptualization of ideas relating to the
+                  theme ”anthropocene”.
+                </p>
+
+                <p>
+                  This could include meetings between art, philosophy, religion,
+                  the natural sciences and the humanities, or meetings between
+                  different traditions of knowledge.
+                </p>
+
+                <p>
+                  The meetingplace in it self is open for everyone that wants to
+                  participate and contribute to it. Its ambition is to provide
+                  space for thinking together, foregrounding the necessity of
+                  testing and developing ideas collectively and as individuals
+                  participating in a collective process. In this process queer,
+                  multicultural and post human perspectives are encouraged.
+                </p>
+              </Col>
+              <Col sm={0} md={6} />
+            </Row>
+            <div
+              style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                justifyContent: 'center'
+              }}
+            >
+              {allSortedActivities.map(activity => (
+                <PublicActivityThumb key={activity.title} item={activity} />
+              ))}
             </div>
           </div>
-        </Row>
+        )}
       </div>
     );
   }
