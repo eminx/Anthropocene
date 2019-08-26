@@ -128,7 +128,7 @@ class LayoutPage extends React.Component {
       <div className="main-viewport">
         <div className="header-container">
           <Row className="header-background">
-            <Col xs={8}>
+            <Col xs={6}>
               <span
                 style={{
                   padding: '6px 12px',
@@ -143,7 +143,7 @@ class LayoutPage extends React.Component {
               </span>
             </Col>
 
-            <Col xs={11} style={{ display: 'flex', justifyContent: 'center' }}>
+            <Col xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
               <Link to="/">
                 {/* <div className="logo skogen-logo" /> */}
                 <h1>
@@ -152,7 +152,7 @@ class LayoutPage extends React.Component {
               </Link>
             </Col>
 
-            <Col xs={5} style={{ textAlign: 'right' }}>
+            <Col xs={6} style={{ textAlign: 'right' }}>
               {notifications && (
                 <Popover
                   placement="bottomRight"
@@ -288,7 +288,9 @@ const ContextInfo = () => (
     <h3 style={boldBabe}>{publicSettings.contextName}</h3>
     <p>{publicSettings.contextAddress}</p>
     <p>
-      <a href={`mailto:${publicSettings.contextEmail}`}>{publicSettings.contextEmail}</a>
+      <a href={`mailto:${publicSettings.contextEmail}`}>
+        {publicSettings.contextEmail}
+      </a>
     </p>
     {/* <p>
       <a href='https://www.facebook.com/skogen.pm' target='_blank'>
