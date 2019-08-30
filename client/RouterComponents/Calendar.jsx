@@ -183,7 +183,7 @@ class Calendar extends React.PureComponent {
     }
 
     if (editBooking) {
-      return <Redirect to={`/edit-booking/${selectedBooking._id}`} />
+      return <Redirect to={`/edit-activity/${selectedBooking._id}`} />
     }
 
     const isSuperAdmin = currentUser && currentUser.isSuperAdmin
