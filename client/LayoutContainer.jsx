@@ -1,8 +1,7 @@
-import { withTracker } from 'meteor/react-meteor-data';
-import React, { Fragment } from 'react';
-import { Link } from 'react-router-dom';
-import { Meteor } from 'meteor/meteor';
-const publicSettings = Meteor.settings.public;
+import { withTracker } from 'meteor/react-meteor-data'
+import React, { Fragment } from 'react'
+import { Link } from 'react-router-dom'
+import { Meteor } from 'meteor/meteor'
 
 import {
   Layout,
@@ -16,8 +15,9 @@ import {
   List,
   Row,
   Col
-} from 'antd/lib';
-const { Content } = Layout;
+} from 'antd/lib'
+const publicSettings = Meteor.settings.public
+const { Content } = Layout
 
 const menu = [
   {
@@ -36,58 +36,58 @@ const menu = [
     label: 'Info',
     route: `/page/about-${publicSettings.contextName}`
   }
-];
+]
 
 const adminMenu = [
   {
     label: 'Users',
     route: '/users'
   }
-];
+]
 
-const FormItem = Form.Item;
+const FormItem = Form.Item
 
 class LayoutPage extends React.Component {
   state = {
     menuOpen: false,
     me: false,
     isNotificationPopoverOpen: false
-  };
+  }
 
-  componentWillUpdate(nextProps, nextState) {
-    const { history } = this.props;
-    const pathname = history.location.pathname;
+  componentWillUpdate (nextProps, nextState) {
+    const { history } = this.props
+    const pathname = history.location.pathname
     if (nextProps.history.location.pathname !== pathname) {
-      this.closeMenu();
+      this.closeMenu()
     }
   }
 
   openMenu = () => {
     this.setState({
       menuOpen: true
-    });
-  };
+    })
+  }
 
   closeMenu = () => {
     this.setState({
       menuOpen: false
-    });
-  };
+    })
+  }
 
   handleNotificationVisibility = () => {
     this.setState({
       isNotificationPopoverOpen: !this.state.isNotificationPopoverOpen
-    });
-  };
+    })
+  }
 
   renderNotificationList = list => {
     if (list.length === 0) {
-      return <em>You don't have unread messages</em>;
+      return <em>You don't have unread messages</em>
     }
 
     return (
       <List
-        size="small"
+        size='small'
         dataSource={list}
         renderItem={item => (
           <List.Item>
@@ -102,19 +102,30 @@ class LayoutPage extends React.Component {
           </List.Item>
         )}
       />
-    );
-  };
+    )
+  }
 
-  render() {
-    const { isNotificationPopoverOpen } = this.state;
-    const { children, currentUser } = this.props;
+  renderUsername = () => {
+    const { currentUser } = this.props
+    const username = currentUser.username
 
-    const notifications = currentUser && currentUser.notifications;
-    let notificationsCounter = 0;
+    if (username.length > 6) {
+      return username.substring(0, 6)
+    } else {
+      return username
+    }
+  }
+
+  render () {
+    const { isNotificationPopoverOpen } = this.state
+    const { children, currentUser } = this.props
+
+    const notifications = currentUser && currentUser.notifications
+    let notificationsCounter = 0
     if (notifications && notifications.length > 0) {
       notifications.forEach(notification => {
-        notificationsCounter += notification.count;
-      });
+        notificationsCounter += notification.count
+      })
     }
 
     const menuIconStyle = {
@@ -122,12 +133,12 @@ class LayoutPage extends React.Component {
       padding: '18px 12px',
       cursor: 'pointer',
       marginLeft: 18
-    };
+    }
 
     return (
-      <div className="main-viewport">
-        <div className="header-container">
-          <Row className="header-background">
+      <div className='main-viewport'>
+        <div className='header-container'>
+          <Row className='header-background'>
             <Col xs={6}>
               <span
                 style={{
@@ -137,14 +148,14 @@ class LayoutPage extends React.Component {
                   backgroundColor: 'rgba(255, 255, 255, .7)'
                 }}
               >
-                <Link to="/my-profile" style={{ color: '#030303' }}>
-                  {currentUser ? currentUser.username : 'LOGIN'}
+                <Link to='/my-profile' style={{ color: '#030303' }}>
+                  {currentUser ? this.renderUsername() : 'LOGIN'}
                 </Link>
               </span>
             </Col>
 
             <Col xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
-              <Link to="/">
+              <Link to='/'>
                 {/* <div className="logo skogen-logo" /> */}
                 <h1>
                   <b>{publicSettings.contextName.toUpperCase()}</b>
@@ -155,18 +166,18 @@ class LayoutPage extends React.Component {
             <Col xs={6} style={{ textAlign: 'right' }}>
               {notifications && (
                 <Popover
-                  placement="bottomRight"
-                  title="Notifications"
+                  placement='bottomRight'
+                  title='Notifications'
                   content={this.renderNotificationList(notifications)}
-                  trigger="click"
+                  trigger='click'
                   visible={isNotificationPopoverOpen}
                   onVisibleChange={this.handleNotificationVisibility}
                 >
                   <Badge count={notificationsCounter}>
                     <Icon
                       onClick={this.toggleNotificationsPopover}
-                      theme="outlined"
-                      type="bell"
+                      theme='outlined'
+                      type='bell'
                       style={{ fontSize: 24, cursor: 'pointer' }}
                     />
                   </Badge>
@@ -176,7 +187,7 @@ class LayoutPage extends React.Component {
           </Row>
         </div>
 
-        <div className="skogen-menu-layout">
+        <div className='skogen-menu-layout'>
           {menu.map(item => (
             <Link to={item.route} key={item.label}>
               <b>{item.label}</b>
@@ -191,13 +202,13 @@ class LayoutPage extends React.Component {
             ))}
         </div>
 
-        <Layout className="layout">
+        <Layout className='layout'>
           <Content>{children}</Content>
         </Layout>
 
         <FancyFooter />
       </div>
-    );
+    )
   }
 }
 
@@ -208,12 +219,12 @@ const widgetBgrstyle = {
   margin: 12,
   marginTop: 32,
   maxWidth: 320
-};
+}
 
 const boldBabe = {
   textTransform: 'uppercase',
   fontWeight: 700
-};
+}
 
 const FancyFooter = () => {
   return (
@@ -238,7 +249,7 @@ const FancyFooter = () => {
 
         <p style={{ marginTop: 24 }}>
           Crafted with ∞♥︎ at{' '}
-          <a href="https://infinitesimals.space">Infinitesimals Labs</a>
+          <a href='https://infinitesimals.space'>Infinitesimals Labs</a>
         </p>
         {/* <p>
           <a
@@ -255,8 +266,8 @@ const FancyFooter = () => {
         </p>
       </div>
     </div>
-  );
-};
+  )
+}
 
 const EmailSignupForm = () => (
   <Fragment>
@@ -265,23 +276,23 @@ const EmailSignupForm = () => (
         Sign up to Our Newsletter
       </h4>
     </FormItem>
-    <form method="POST" action="https://gansub.com/s/RKNO/">
+    <form method='POST' action='https://gansub.com/s/RKNO/'>
       <FormItem>
-        <Input addonBefore="email" id="email" name="email" />
+        <Input addonBefore='email' id='email' name='email' />
       </FormItem>
 
       <FormItem>
-        <Input addonBefore="first name" id="first_name" name="first_name" />
+        <Input addonBefore='first name' id='first_name' name='first_name' />
       </FormItem>
 
-      <input type="hidden" name="gan_repeat_email" />
+      <input type='hidden' name='gan_repeat_email' />
 
       <FormItem>
-        <Button htmlType="submit">Signup</Button>
+        <Button htmlType='submit'>Signup</Button>
       </FormItem>
     </form>
   </Fragment>
-);
+)
 
 const ContextInfo = () => (
   <Fragment>
@@ -300,13 +311,13 @@ const ContextInfo = () => (
       (opens in a new tab)
     </p> */}
   </Fragment>
-);
+)
 
 export default (LayoutContainer = withTracker(props => {
-  const meSub = Meteor.subscribe('me');
-  const currentUser = Meteor.user();
+  const meSub = Meteor.subscribe('me')
+  const currentUser = Meteor.user()
 
   return {
     currentUser
-  };
-})(LayoutPage));
+  }
+})(LayoutPage))
