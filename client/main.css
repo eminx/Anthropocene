@@ -13,21 +13,22 @@ h1 {
 }
 
 .logo {
-  width: 180px;
-  height: 100px;
+  width: 240px;
+  height: 120px;
   background-repeat: no-repeat;
   background-size: contain;
+  background-position: center;
 }
 
 @media (max-width: 600px) {
   .logo {
-    width: 90px;
-    height: 50px;
+    width: 150px;
+    height: 70px;
   }
 }
 
 .skogen-logo {
-  /* background-image: url('https://s3.eu-central-1.amazonaws.com/pomegra-profile-images/skogen-logo-x2.png'); */
+  background-image: url('https://antroposcene.s3.eu-central-1.amazonaws.com/anthr-logo.png');
   background-repeat: no-repeat;
 }
 

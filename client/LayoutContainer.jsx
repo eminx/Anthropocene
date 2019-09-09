@@ -156,10 +156,10 @@ class LayoutPage extends React.Component {
 
             <Col xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
               <Link to='/'>
-                {/* <div className="logo skogen-logo" /> */}
-                <h1>
+                <div className="logo skogen-logo" />
+                {/* <h1>
                   <b>{publicSettings.contextName.toUpperCase()}</b>
-                </h1>
+                </h1> */}
               </Link>
             </Col>
 
